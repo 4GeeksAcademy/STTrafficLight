@@ -1,9 +1,8 @@
- import React, { useState } from 'react';
+import React, { useState } from 'react';
 export const TrafficLight = () => {
     const [redLight, setRedLight] = useState(false);
     const [yellowLight, setYellowLight] = useState(false);
     const [greenLight, setGreenLight] = useState(false);
-    let lastNum = 0;
     
     const redOn = () => {
         setRedLight(!redLight);
@@ -23,22 +22,18 @@ export const TrafficLight = () => {
         setYellowLight(false);
     };
     
-    function randomNum(min, max) {
-        let num = 0;
-        do {
-            num = Math.floor(Math.random() * (max - min + 1)) + min;
-        } while (num === lastNum);
-        lastNum = num;
-        console.log(num)
+    function randomNum () {
+        let num = Math.round(Math.random() * 2) + 1;
+        console.log(num);
         return num;
     }
 
 
     const randomice = () => {
-        let randomColorNum = randomNum(1, 3); 
-        if(randomColorNum == 1){greenOn()}
-        if(randomColorNum == 2){yellowOn()}
-        if(randomColorNum == 3){redOn()}
+        let randomColorNum = randomNum(); 
+        if(randomColorNum == 1 && greenLight == false){greenOn()}
+        if(randomColorNum == 2 && yellowLight == false){yellowOn()}
+        if(randomColorNum == 3 && redLight == false){redOn()}
 
     }
 
@@ -58,8 +53,7 @@ export const TrafficLight = () => {
                 </div>
                 <div>
                     <button type="button" onClick={randomice} className="btn btn-info mt-4">Random</button>
-                </div>
-                
+                </div>     
             </div>
          </div>
     );
